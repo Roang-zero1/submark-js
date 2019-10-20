@@ -3,6 +3,8 @@
 import { readFileSync, existsSync } from "fs";
 import commander from "commander";
 
+import { Extractor } from "../index";
+
 var program = new commander.Command();
 
 var filename: any;
@@ -65,8 +67,8 @@ if (typeof program.encoding !== "string") {
 var fileContent: string;
 try {
   fileContent = readFileSync(filename, String(program.encoding));
-  console.log(`Read file: ${fileContent}`);
-  //TO-DO: Add extractor functionality
+  var extractor = new Extractor(fileContent);
+  extractor.find(headingText, headingLevel, program.exact);
 } catch (error) {
   if (error.code === "ERR_INVALID_OPT_VALUE_ENCODING") {
     console.error("Invalid file encoding chosen.");
