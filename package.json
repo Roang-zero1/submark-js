@@ -8,11 +8,16 @@
   "private": false,
   "dependencies": {
     "@types/commonmark": "^0.27.4",
+    "@types/figlet": "^1.2.0",
     "@types/node": "^12.11.1",
+    "commander": "^3.0.2",
     "commonmark": "^0.29.0"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "submark": "./dist/bin/submark.js"
+  },
   "scripts": {
     "build-ts": "tsc",
     "watch-ts": "tsc -w"
