@@ -25,7 +25,7 @@ export class Extractor {
   public find(
     headingText: string,
     headingLevel: number,
-    exact: boolean = false
+    exact: boolean = false,
   ): string {
     var walker = this.documentNode.walker();
     var walkerEvent;
