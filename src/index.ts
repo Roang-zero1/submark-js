@@ -3,7 +3,7 @@ import { Parser, Node } from "commonmark";
 /**
  * @class Class representing a parsed document for searching.
  */
-class Extractor {
+export class Extractor {
   documentNode: Node;
 
   /**
@@ -56,5 +56,3 @@ class Extractor {
     return "";
   }
 }
-
-module.exports = Extractor;
