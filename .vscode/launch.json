@@ -5,10 +5,11 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/dist/index.js",
+      "program": "${workspaceFolder}/dist/bin/submark.js",
       "preLaunchTask": "tsc-build",
       "outFiles": ["${workspaceFolder}/out/**/*.js"],
-      "internalConsoleOptions": "openOnSessionStart"
+      "internalConsoleOptions": "openOnSessionStart",
+      "args": ["CHANGELOG.md", "v1.0.0"]
     }
   ]
 }
