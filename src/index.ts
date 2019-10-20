@@ -1,6 +1,4 @@
 import { Parser, Node } from "commonmark";
-import * as fs from "fs";
-import * as path from "path";
 
 /**
  * @class Class representing a parsed document for searching.
@@ -60,9 +58,3 @@ class Extractor {
 }
 
 module.exports = Extractor;
-
-fs.readFile(path.join(".", "CHANGELOG.md"), "utf-8", (err, data) => {
-  if (err) throw err;
-  var extractor = new Extractor(data);
-  extractor.find("v1.0.0", 2);
-});
