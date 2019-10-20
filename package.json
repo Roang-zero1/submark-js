@@ -2,7 +2,6 @@
   "name": "submark-js",
   "version": "0.1.0",
   "description": "Extract a part of a CommonMark/Markdown document",
-  "main": "index.ts",
   "repository": "https://github.com/Roang-zero1/submark-js",
   "author": "Lucas Brandstaetter <lucas@brandstaetter.tech>",
   "license": "MIT",
@@ -11,5 +10,11 @@
     "@types/commonmark": "^0.27.4",
     "@types/node": "^12.11.1",
     "commonmark": "^0.29.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w"
   }
 }
