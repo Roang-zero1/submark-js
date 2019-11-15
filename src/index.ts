@@ -1,18 +1,28 @@
-import { Parser, Node } from "commonmark";
+import markdown from "remark-parse";
+import stringify from "remark-stringify";
+import unified from "unified";
 
 /**
  * @class Class representing a parsed document for searching.
  */
 export class Extractor {
-  documentNode: Node;
+  parserSettings: {};
+  stringifySettings: {};
+  document: String;
 
+  // TODO: Improve defaults handling based on https://github.com/remarkjs/remark/issues/452
   /**
    * Creates an instance of the Chapter extractor
    * @param {string} document The document to be searched.
    */
-  constructor(document: string) {
-    var reader = new Parser();
-    this.documentNode = reader.parse(document);
+  constructor(
+    document: String,
+    parserSettings: {} = {},
+    stringifySettings: {} = {},
+  ) {
+    this.document = document;
+    this.parserSettings = parserSettings;
+    this.stringifySettings = stringifySettings;
   }
 
   /**
@@ -27,32 +37,19 @@ export class Extractor {
     headingLevel: number,
     exact: boolean = false,
   ): string {
-    var walker = this.documentNode.walker();
-    var walkerEvent;
-    while ((walkerEvent = walker.next())) {
-      var node = walkerEvent.node;
-      if (walkerEvent.entering) {
-        //console.log(node);
-        if (node.type === "heading" && node.level === headingLevel) {
-          if (node.firstChild) {
-            console.log(node.firstChild.literal);
-            if (exact) {
-              if (node.firstChild.literal === headingText) {
-                console.log("Found");
-              }
-            } else {
-              if (
-                node.firstChild.literal &&
-                node.firstChild.literal.includes(headingText)
-              ) {
-                console.log("Found");
-              }
-            }
-          }
-          console.log(node.level);
-        }
+    var processor = unified()
+      .use(markdown, this.parserSettings)
+      .use(stringify, this.stringifySettings);
+
+    processor.process(this.document, (err, file) => {
+      if (err) {
+        console.log(err);
       }
-    }
+      console.log(String(file));
+    });
+    console.log(
+      `Searching for ${headingText} at level ${headingLevel} ${exact}`,
+    );
     return "";
   }
 }
